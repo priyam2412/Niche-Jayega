@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id @default(cuid())
+  name            String
+  phone           String   @unique
+  passwordHash    String
+  avatarUrl       String?
+  rating          Float    @default(5)
+  totalDeliveries Int      @default(0)
+  totalPosted     Int      @default(0)
+  totalEarned     Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  memberships         Membership[]
+  communitiesCreated  Community[]
+  requestsPosted      PickupRequest[] @relation("Requester")
+  requestsRunning     PickupRequest[] @relation("Runner")
+}
+
+model Community {
+  id           String   @id @default(cuid())
+  name         String
+  code         String   @unique
+  gateLocation String   @default("Main Gate")
+  createdAt    DateTime @default(now())
+  createdById  String
+  createdBy    User     @relation(fields: [createdById], references: [id])
+  memberships  Membership[]
+  requests     PickupRequest[]
+}
+
+model Membership {
+  id          String     @id @default(cuid())
+  userId      String
+  communityId String
+  room        String     @default("")
+  joinedAt    DateTime   @default(now())
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  community   Community  @relation(fields: [communityId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, communityId])
+}
+
+model PickupRequest {
+  id             String    @id @default(cuid())
+  requesterId    String
+  runnerId       String?
+  communityId    String
+  foodApp        String
+  restaurantName String
+  orderDetails   String?
+  pickupLocation String
+  dropLocation   String
+  rewardAmount   Int
+  status         String    @default("open")
+  createdAt      DateTime  @default(now())
+  acceptedAt     DateTime?
+  pickedUpAt     DateTime?
+  deliveredAt    DateTime?
+  cancelledAt    DateTime?
+
+  requester User      @relation("Requester", fields: [requesterId], references: [id])
+  runner    User?     @relation("Runner", fields: [runnerId], references: [id])
+  community Community @relation(fields: [communityId], references: [id])
+}

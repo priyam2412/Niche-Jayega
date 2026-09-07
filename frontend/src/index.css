@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-outfit: 'Outfit', sans-serif;
+    --font-manrope: 'Manrope', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-manrope);
+    background-color: #fff8f4;
+    color: #1e1b18;
+    overscroll-behavior: none;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-display, .font-headline {
+    font-family: var(--font-outfit);
+  }
+}
+
+/* Custom Late-Night College Motion & 3D Keyframes */
+@keyframes pulse-curfew {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.45); filter: drop-shadow(0 0 4px rgba(239,68,68,0.3)); }
+  50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); filter: drop-shadow(0 0 9px rgba(254,166,25,0.7)); }
+}
+
+@keyframes coin-spin-float {
+  0% { transform: translateY(0px) rotateY(0deg); }
+  50% { transform: translateY(-4px) rotateY(180deg); }
+  100% { transform: translateY(0px) rotateY(360deg); }
+}
+
+@keyframes runner-dash {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes radar-ping {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  70% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+@keyframes dorm-lamp-flicker {
+  0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(254, 166, 25, 0.5); }
+  45% { opacity: 0.88; text-shadow: 0 0 4px rgba(254, 166, 25, 0.2); }
+  50% { opacity: 1; text-shadow: 0 0 14px rgba(254, 166, 25, 0.7); }
+  85% { opacity: 0.94; }
+}
+
+.animate-curfew-pulse { 
+  animation: pulse-curfew 2.2s infinite ease-in-out; 
+}
+
+.animate-coin-spin { 
+  display: inline-block; 
+  perspective: 600px; 
+  animation: coin-spin-float 4s infinite linear; 
+}
+
+.animate-dorm-lamp { 
+  animation: dorm-lamp-flicker 3s infinite ease-in-out; 
+}
+
+.animate-radar-ring { 
+  animation: radar-ping 2s cubic-bezier(0, 0.2, 0.8, 1) infinite; 
+}
+
+.runner-stripe-bar {
+  background: repeating-linear-gradient(45deg, #00855b, #00855b 10px, #006947 10px, #006947 20px);
+  background-size: 200% 100%;
+  animation: runner-dash 2s linear infinite;
+}
+
+.tilt-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.tilt-card:hover {
+  transform: translateY(-3px) scale(1.006);
+  box-shadow: 0 14px 28px -6px rgba(163, 57, 0, 0.08), 0 8px 16px -4px rgba(30, 27, 24, 0.06);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
