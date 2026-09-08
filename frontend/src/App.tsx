@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { ScreenType, OrderItem } from "./types";
 import { Header } from "./components/Header";

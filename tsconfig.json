@@ -22,9 +22,11 @@
     "next-env.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
+    "frontend/src/**/*.ts",
+    "frontend/src/**/*.tsx",
     "next.config.ts",
     "tailwind.config.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "frontend"]
+  "exclude": ["node_modules", "frontend/src/main.tsx"]
 }
